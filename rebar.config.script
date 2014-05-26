@@ -1,0 +1,16 @@
+%% Disable rebar's dependency processing
+Config2 = lists:keystore(deps, 1, CONFIG, {deps, []}),
+
+%% Remove OTP version checking
+Config3 = lists:keydelete(require_otp_vsn, 1, Config2),
+
+%% Run existing rebar.config.script, if it exists
+NextScript = "rebar.config.script",
+case filelib:is_regular(NextScript) of
+    true ->
+        {ok, Config4} = file:script(NextScript, [ {'CONFIG', Config3},
+                                                  {'SCRIPT', NextScript} ]),
+        Config4;
+    false ->
+        Config3
+end.
