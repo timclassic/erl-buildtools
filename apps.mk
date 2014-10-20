@@ -77,7 +77,7 @@ eunit_formatters: rebar
 	$(rebar-compile)
 
 rebar:
-	cd rebar && ./bootstrap
+	cd rebar && ./bootstrap debug
 
 sync: rebar
 	$(rebar-compile)
