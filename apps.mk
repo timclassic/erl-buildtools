@@ -81,3 +81,6 @@ rebar:
 
 sync: rebar
 	$(rebar-compile)
+
+erlexec: rebar
+	$(rebar-compile)
