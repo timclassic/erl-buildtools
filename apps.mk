@@ -87,3 +87,6 @@ erlexec: rebar
 
 gproc: rebar
 	$(rebar-compile)
+
+percept2: rebar
+	$(rebar-compile)
