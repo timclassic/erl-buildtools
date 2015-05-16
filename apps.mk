@@ -90,3 +90,9 @@ gproc: rebar
 
 percept2: rebar
 	$(rebar-compile)
+
+ibrowse: rebar
+	$(rebar-compile)
+
+yaws: rebar ibrowse
+	$(rebar-compile)
