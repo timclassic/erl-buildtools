@@ -64,7 +64,10 @@ neotoma: rebar
 erlware_commons: rebar rebar_vsn_plugin
 	$(rebar-compile)
 
-erlydtl: rebar eunit_formatters
+merl:
+	ERLC_FLAGS=+debug_info make -e -C merl
+
+erlydtl: rebar merl eunit_formatters
 	test -L $@/deps/merl \
 	    || mkdir -p $@/deps; \
 	       ln -fs ../../merl $@/deps/merl

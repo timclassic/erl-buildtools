@@ -4,13 +4,29 @@ Config2 = lists:keystore(deps, 1, CONFIG, {deps, []}),
 %% Remove OTP version checking
 Config3 = lists:keydelete(require_otp_vsn, 1, Config2),
 
+%% Make sure 'debug_info' is always included and 'no_debug_info' is
+%% always excluded from erl_opts
+Config4 = case lists:keyfind(erl_opts, 1, Config3) of
+              false ->
+                  Config3;
+              {erl_opts, ErlOpts} ->
+                  F = fun(E) when E =:= debug_info;
+                                  E =:= no_debug_info ->
+                              false;
+                         (E) ->
+                              true
+                      end,
+                  NewErlOpts = [ debug_info | lists:filter(F, ErlOpts) ],
+                  lists:keyreplace(erl_opts, 1, Config3, {erl_opts, NewErlOpts})
+          end,
+
 %% Run existing rebar.config.script, if it exists
 NextScript = "rebar.config.script",
 case filelib:is_regular(NextScript) of
     true ->
-        {ok, Config4} = file:script(NextScript, [ {'CONFIG', Config3},
+        {ok, Config5} = file:script(NextScript, [ {'CONFIG', Config4},
                                                   {'SCRIPT', NextScript} ]),
-        Config4;
+        Config5;
     false ->
-        Config3
+        Config4
 end.
