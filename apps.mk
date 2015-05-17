@@ -99,3 +99,12 @@ ibrowse: rebar
 
 yaws: rebar ibrowse
 	$(rebar-compile)
+
+riakc: rebar riak_pb
+	$(rebar-compile)
+
+riak_pb: rebar protobuffs
+	$(rebar-compile)
+
+protobuffs: rebar meck
+	$(rebar-compile)
