@@ -108,3 +108,8 @@ riak_pb: rebar protobuffs
 
 protobuffs: rebar meck
 	$(rebar-compile)
+
+mimeparse: mimeparse/ebin/mimeparse.beam
+mimeparse/ebin/mimeparse.beam: mimeparse/mimeparse.erl
+	mkdir -p mimeparse/ebin
+	cd mimeparse && erlc +debug_info -o ebin mimeparse.erl
