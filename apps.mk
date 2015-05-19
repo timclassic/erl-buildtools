@@ -99,6 +99,7 @@ ibrowse: rebar
 
 yaws: rebar ibrowse
 	$(rebar-compile)
+	cd yaws && erlc +debug_info -o ebin contrib/*.erl
 
 riakc: rebar riak_pb
 	$(rebar-compile)
@@ -113,3 +114,6 @@ mimeparse: mimeparse/ebin/mimeparse.beam
 mimeparse/ebin/mimeparse.beam: mimeparse/mimeparse.erl
 	mkdir -p mimeparse/ebin
 	cd mimeparse && erlc +debug_info -o ebin mimeparse.erl
+
+jiffy: rebar
+	$(rebar-compile)
