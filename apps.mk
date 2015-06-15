@@ -85,7 +85,7 @@ rebar:
 sync: rebar
 	$(rebar-compile)
 
-erlexec: rebar
+exec: rebar
 	$(rebar-compile)
 
 gproc: rebar
