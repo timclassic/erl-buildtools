@@ -117,3 +117,6 @@ mimeparse/ebin/mimeparse.beam: mimeparse/mimeparse.erl
 
 jiffy: rebar
 	$(rebar-compile)
+
+uuid:
+	cd uuid && make
