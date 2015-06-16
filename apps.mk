@@ -120,3 +120,6 @@ jiffy: rebar
 
 uuid:
 	cd uuid && make
+
+epistula: rebar
+	$(rebar-compile)
