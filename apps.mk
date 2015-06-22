@@ -54,7 +54,7 @@ base32: rebar
 rebar_vsn_plugin: rebar
 	$(rebar-compile)
 
-relx: rebar rebar_vsn_plugin neotoma erlware_commons erlydtl getopt
+relx: rebar neotoma erlware_commons getopt providers bbmustache
 	$(rebar-compile)
 	$(rebar-escriptize)
 
@@ -62,15 +62,6 @@ neotoma: rebar
 	$(rebar-compile)
 
 erlware_commons: rebar rebar_vsn_plugin
-	$(rebar-compile)
-
-merl:
-	ERLC_FLAGS=+debug_info make -e -C merl
-
-erlydtl: rebar merl eunit_formatters
-	test -L $@/deps/merl \
-	    || mkdir -p $@/deps; \
-	       ln -fs ../../merl $@/deps/merl
 	$(rebar-compile)
 
 getopt: rebar
@@ -122,4 +113,10 @@ uuid:
 	cd uuid && make
 
 epistula: rebar
+	$(rebar-compile)
+
+providers: rebar
+	$(rebar-compile)
+
+bbmustache: rebar
 	$(rebar-compile)
